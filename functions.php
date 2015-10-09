@@ -3,7 +3,7 @@
 	
 	// ühenduse loomiseks kasuta
 	require_once("../configglobal.php");
-	$database = "if15_romil_2";
+	$database = "if15_karilaid";
 	
 	// paneme sessiooni käima, saame kasutada $_SESSION muutujaid
 	session_start();
@@ -55,11 +55,21 @@
 		
 		$stmt = $mysqli->prepare("INSERT INTO car_plates (user_id, number_plate, color) VALUES (?, ?, ?)");
 		$stmt->bind_param("iss", $_SESSION["id_from_db"], $car_plate, $color);
-		$stmt->execute();
-		echo $stmt->error;
-		$stmt->close();
 		
-		$mysqli->close();		
+		
+		$message = "Edukalt sisestatud andmebaasi";
+		
+		if($stmt->execute()){
+			
+			$message = "Edukalt sisestatud andmebaasi";
+			
+		}else{
+			
+			echo $stmt->error;
+		}
+		$stmt->close();
+		$mysqli->close();	
+		return $message;
 	}
 	
 	

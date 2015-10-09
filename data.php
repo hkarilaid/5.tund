@@ -39,7 +39,15 @@
 			
 			// functions.php failis käivina funktsiooni
 			createCarPlate($car_plate, $color);
+			$msg = createCarPlate($car_plate, $color);
 			
+			if($msg != ""){
+				
+				$car_plate = "";
+				$color = "";
+				
+				echo $msg;
+			}
 		}
     } // create if end
 	
